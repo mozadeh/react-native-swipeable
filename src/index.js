@@ -148,7 +148,8 @@ export default class Swipeable extends PureComponent {
     swipeReleaseAnimationConfig: {
       toValue: {x: 0, y: 0},
       duration: 250,
-      easing: Easing.elastic(0.5)
+      easing: Easing.elastic(0.5),
+      useNativeDriver: false
     },
 
     // misc
@@ -250,7 +251,8 @@ export default class Swipeable extends PureComponent {
     Animated.timing(pan, {
       toValue,
       duration: 250,
-      easing: Easing.elastic(0.5)
+      easing: Easing.elastic(0.5),
+      useNativeDriver: false
     }).start(() => this.recenter(swipeReleaseAnimationFn, swipeReleaseAnimationConfig, () => onDone && onDone()));
   };
 
@@ -259,7 +261,7 @@ export default class Swipeable extends PureComponent {
   _handlePan = Animated.event([null, {
     dx: this.state.pan.x,
     dy: this.state.pan.y
-  }]);
+  }], { useNativeDriver: false });
 
   _handleMoveShouldSetPanResponder = (event, gestureState) => {
     const {swipeStartMinDistance, swipeStartMinLeftEdgeClearance, swipeStartMinRightEdgeClearance} = this.props;
